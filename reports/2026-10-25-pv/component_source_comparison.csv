@@ -1,0 +1,4 @@
+component,bias_percent,mae_w_m2,rmse_w_m2,correlation,valid_hours,excluded_hours,method_note
+GHI,1.061,49.95,108.74,0.9297,8760,0,"Open-Meteo instant values interpolated to PVGIS SARAH timestamps; PVGIS G(i) from zero-tilt request"
+DNI_derived,12.870,224.21,298.97,0.5382,3744,5016,"PVGIS DNI derived from zero-tilt Gb(i)/cos(zenith); valid only when solar elevation >10 degrees"
+DHI,-5.976,27.23,53.10,0.8680,8760,0,"Open-Meteo instant values interpolated to PVGIS SARAH timestamps; PVGIS Gd(i) from zero-tilt request"

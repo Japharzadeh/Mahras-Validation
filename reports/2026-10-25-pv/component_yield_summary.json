@@ -1,0 +1,51 @@
+{
+  "run_date": "2026-10-25",
+  "branch": "feature/pv-validation-desktop-ui",
+  "reference_year": 2023,
+  "location": {"latitude": 37.64287, "longitude": 48.53205},
+  "orientations": {
+    "roof_report": {"tilt_deg": 0, "azimuth_from_north_deg": 180, "pvgis_aspect_deg": 0},
+    "tilted_reference": {"tilt_deg": 32, "azimuth_from_north_deg": 190, "pvgis_aspect_deg": 10}
+  },
+  "time_alignment": {
+    "roof_report": {"old_plus_30_mae_w_m2": 24.792, "corrected_minus_30_mae_w_m2": 0.866},
+    "tilted_reference": {"old_plus_30_mae_w_m2": 31.319, "corrected_minus_30_mae_w_m2": 0.623}
+  },
+  "component_source_comparison": {
+    "GHI": {"bias_percent": 1.061, "mae_w_m2": 49.95, "rmse_w_m2": 108.74, "correlation": 0.9297, "valid_hours": 8760},
+    "DNI_derived": {"bias_percent": 12.87, "mae_w_m2": 224.21, "rmse_w_m2": 298.97, "correlation": 0.5382, "valid_hours": 3744, "excluded_hours": 5016},
+    "DHI": {"bias_percent": -5.976, "mae_w_m2": 27.23, "rmse_w_m2": 53.1, "correlation": 0.868, "valid_hours": 8760}
+  },
+  "production_function_vs_pvlib_reference": {
+    "roof_report": {"production_kwh_per_kwp": 1382.363, "pvlib_reference_kwh_per_kwp": 1383.988, "difference_percent": -0.1174, "status": "PASS"},
+    "tilted_reference": {"production_kwh_per_kwp": 1540.416, "pvlib_reference_kwh_per_kwp": 1542.269, "difference_percent": -0.1201, "status": "PASS"},
+    "internal_tolerance_percent": 1
+  },
+  "temperature_model_sensitivity": {"roof_report_faiman_minus_noct_percent": 4.42, "tilted_reference_faiman_minus_noct_percent": 5.073},
+  "annual_yield_context": {
+    "roof_report": {"mahras_dc_equivalent_kwh_per_kwp": 1383.988, "pvgis_final_output_kwh_per_kwp": 1237.462, "numerical_difference_percent": 11.841, "status": "NOT_COMPARABLE"},
+    "tilted_reference": {"mahras_dc_equivalent_kwh_per_kwp": 1542.269, "pvgis_final_output_kwh_per_kwp": 1399.212, "numerical_difference_percent": 10.224, "status": "NOT_COMPARABLE"}
+  },
+  "monthly_poa_screen": {
+    "threshold_abs_bias_percent": 20,
+    "roof_report": {"monthly_bias_percent": [36.11, 30.27, 18.24, 11.2, 3.84, -11.71, -17.75, -6.31, -22.21, 7.7, 19.39, 16.71], "review_months": ["2023-01", "2023-02", "2023-09"]},
+    "tilted_reference": {"monthly_bias_percent": [22.41, 25.95, 16.2, 9.71, 0.59, -13.86, -21.11, -9.51, -27.53, 6.7, 20.36, 15.84], "review_months": ["2023-01", "2023-02", "2023-07", "2023-09", "2023-11"]}
+  },
+  "field_validation": "NOT_PERFORMED",
+  "production_coefficients_changed": false,
+  "artifact": "https://github.com/Japharzadeh/WindFarm/actions/runs/40231005334/artifacts/12613650207",
+  "same_source_instant_poa_vs_gti": {
+    "roof_report": {
+      "isotropic": {"bias_percent": 1.2256466571, "mae_w_m2": 12.1730268351, "rmse_w_m2": 22.468396146, "correlation": 0.9969975458},
+      "haydavies": {"bias_percent": 1.2244399613, "mae_w_m2": 12.1754656907, "rmse_w_m2": 22.4687957707, "correlation": 0.9969974877},
+      "perez": {"bias_percent": 1.1408064802, "mae_w_m2": 12.3264032637, "rmse_w_m2": 22.5098473791, "correlation": 0.9969898947}
+    },
+    "tilted_reference": {
+      "isotropic": {"bias_percent": 1.8924993102, "mae_w_m2": 15.1049070431, "rmse_w_m2": 28.601723096, "correlation": 0.9962224446},
+      "haydavies": {"bias_percent": 4.8840951348, "mae_w_m2": 17.5698163122, "rmse_w_m2": 34.3136846896, "correlation": 0.9963675367},
+      "perez": {"bias_percent": 6.969556836, "mae_w_m2": 20.5507165044, "rmse_w_m2": 38.3710051346, "correlation": 0.9966678563}
+    },
+    "note": "Open-Meteo instant POA reference is linearly interpolated from hourly instant samples to PVGIS timestamps; this is a time-alignment diagnostic, not native sub-hourly validation."
+  },
+  "annual_poa_cross_provider_bias_percent": {"roof_report": 0.8913415482, "tilted_reference": -0.2207925199}
+}

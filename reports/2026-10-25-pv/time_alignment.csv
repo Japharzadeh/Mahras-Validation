@@ -1,0 +1,5 @@
+orientation,solar_position_convention,mae_w_m2,rmse_w_m2,annual_bias_percent,screen_status
+0deg,old timestamp +30 minutes,24.792,43.817,-1.422,REJECTED
+0deg,interval center timestamp -30 minutes,0.866,1.795,0.036,PASS
+32deg,old timestamp +30 minutes,31.319,57.410,-0.408,REJECTED
+32deg,interval center timestamp -30 minutes,0.623,2.158,-0.077,PASS

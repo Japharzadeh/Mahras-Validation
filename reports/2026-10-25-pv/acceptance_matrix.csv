@@ -1,0 +1,12 @@
+criterion,orientation,status,observed,threshold_or_reason
+Open-Meteo interval-center convention,0deg,PASS,"MAE 24.792 -> 0.866 W/m2","corrected MAE <=2 W/m2 and improves over +30 minute convention; internal screen"
+Open-Meteo interval-center convention,32deg,PASS,"MAE 31.319 -> 0.623 W/m2","corrected MAE <=2 W/m2 and improves over +30 minute convention; internal screen"
+Hourly isotropic POA vs same-provider GTI,0deg,PASS,"Bias 0.144%; MAE 0.598 W/m2","absolute annual bias <=1% and MAE <=2 W/m2; internal screen"
+Hourly isotropic POA vs same-provider GTI,32deg,PASS,"Bias 0.034%; MAE 0.412 W/m2","absolute annual bias <=1% and MAE <=2 W/m2; internal screen"
+Production yield function vs pvlib same-input reference,0deg,PASS,"difference -0.1174%","absolute annual yield difference <=1%; internal code-parity screen"
+Production yield function vs pvlib same-input reference,32deg,PASS,"difference -0.1201%","absolute annual yield difference <=1%; internal code-parity screen"
+Monthly Mahras POA vs PVGIS screen,0deg,REVIEW_REQUIRED,"2023-01; 2023-02; 2023-09","absolute monthly bias <=20%; screening threshold only"
+Monthly Mahras POA vs PVGIS screen,32deg,REVIEW_REQUIRED,"2023-01; 2023-02; 2023-07; 2023-09; 2023-11","absolute monthly bias <=20%; screening threshold only"
+GHI/DNI/DHI product comparison,both,DIAGNOSTIC_ONLY,"GHI +1.061%; DNI +12.870% over 3744 hours; DHI -5.976%","Different climate products; DNI derived; no universal acceptance threshold"
+Annual PVGIS yield comparison,both,NOT_COMPARABLE,"Mahras DC-equivalent vs PVGIS final output typically AC","Different output boundary and climate data"
+Measured-site field validation,both,NOT_PERFORMED,"No measured POA or AC-meter time series supplied","Required before claiming empirical accuracy"

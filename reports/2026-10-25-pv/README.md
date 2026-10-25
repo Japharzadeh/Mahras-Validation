@@ -1,17 +1,26 @@
 # مجموعه اعتبارسنجی PV — 2026-10-25
 
-این فایل‌ها از شاخه `feature/pv-validation-desktop-ui` مخزن WindFarm کپی شده‌اند.
+این بسته شامل گزارش جامع، خلاصه ماشین‌خوان، ماتریس پذیرش، فایل‌های CSV و نمودارهای ارجاع‌شده است. فایل‌های گزارش و داده‌های جدول‌بندی‌شده در این مخزن نگهداری می‌شوند؛ نمودارهای SVG اصلی به منبع WindFarm پیوند دارند.
 
-- `report.md`: گزارش جامع.
-- `component_yield_summary.json`: خلاصه ماشین‌خوان.
-- `acceptance_matrix.csv`: معیار و وضعیت.
-- `component_source_comparison.csv`: مقایسه GHI/DNI/DHI.
-- `monthly_component_bias.csv`: اختلاف ماهانه مؤلفه‌ها و POA.
-- `poa_model_comparison.csv`: مقایسه مدل‌های POA.
-- `annual_yield_model_comparison.csv`: مقایسه تولید، مرجع pvlib، حساسیت دما و PVGIS PVcalc.
-- `time_alignment.csv`: قرارداد timestamp.
-- فایل‌های `*.svg`: نمودارهای برداری.
+## فایل‌های این مخزن
+- [گزارش جامع](report.md)
+- [خلاصه ماشین‌خوان](component_yield_summary.json)
+- [ماتریس پذیرش](acceptance_matrix.csv)
+- [مقایسه GHI/DNI/DHI](component_source_comparison.csv)
+- [اختلاف ماهانه مؤلفه‌ها و POA](monthly_component_bias.csv)
+- [مقایسه مدل‌های POA](poa_model_comparison.csv)
+- [مقایسه مدل تولید سالانه و مرز DC/AC](annual_yield_model_comparison.csv)
+- [هم‌ترازی زمانی](time_alignment.csv)
 
-منبع: [WindFarm validation outputs](https://github.com/Japharzadeh/WindFarm/tree/feature/pv-validation-desktop-ui/validations/results/component_yield_2026-10-25) · [اجرای CI](https://github.com/Japharzadeh/WindFarm/actions/runs/40231005334) · [آرتیفکت](https://github.com/Japharzadeh/WindFarm/actions/runs/40231005334/artifacts/12613650207)
+## نمودارهای SVG منبع
+- [Monthly component bias](https://github.com/Japharzadeh/WindFarm/blob/feature/pv-validation-desktop-ui/validations/results/component_yield_2026-10-25/monthly_component_bias.svg)
+- [Monthly POA bias](https://github.com/Japharzadeh/WindFarm/blob/feature/pv-validation-desktop-ui/validations/results/component_yield_2026-10-25/monthly_poa_bias.svg)
+- [PVGIS transposition bias at 32°](https://github.com/Japharzadeh/WindFarm/blob/feature/pv-validation-desktop-ui/validations/results/component_yield_2026-10-25/monthly_pvgis_transposition_bias_32deg.svg)
+- [Time alignment MAE](https://github.com/Japharzadeh/WindFarm/blob/feature/pv-validation-desktop-ui/validations/results/component_yield_2026-10-25/time_alignment_mae.svg)
 
-فایل‌های خام/میانی کامل ممکن است فقط در آرتیفکت CI باشند. برای بایگانی بلندمدت آن‌ها را با مجوز مناسب ذخیره و checksum ثبت کنید.
+## منبع و سابقه اجرا
+- منبع: [WindFarm validation outputs](https://github.com/Japharzadeh/WindFarm/tree/feature/pv-validation-desktop-ui/validations/results/component_yield_2026-10-25)
+- [اجرای GitHub Actions](https://github.com/Japharzadeh/WindFarm/actions/runs/40231005334)
+- [آرتیفکت اجرای CI](https://github.com/Japharzadeh/WindFarm/actions/runs/40231005334/artifacts/12613650207)
+
+**محدودیت بایگانی:** داده‌های ساعتی خام/میانی کامل در این commit به‌صورت فایل محلی کپی نشده‌اند؛ فعلاً از آرتیفکت CI قابل دسترسی‌اند. برای بایگانی بلندمدت باید آرتیفکت دانلود و در مخزن/فضای آرشیو مناسب نگهداری شود، پس از بررسی مجوز و حجم.

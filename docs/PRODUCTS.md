@@ -1,28 +1,27 @@
-# محصولات و محدوده اعتبارسنجی
+# Mahras components covered by this evidence repository
 
-این سند فهرست اولیه محصولاتی است که می‌توانند در چارچوب Mahras Validation مستندسازی شوند. درج نام محصول به معنی اعتبارسنجی کامل آن نیست؛ وضعیت هر محصول باید فقط بر اساس گزارش‌های موجود تعیین شود.
+This document describes the product areas represented in the current evidence snapshot. It is not a complete product specification.
 
-## Mahras WindFarm
-نرم‌افزار تحلیل و طراحی سایت نیروگاه‌های انرژی تجدیدپذیر، از جمله خورشیدی و بادی.
-- حوزه‌های آزمون پیشنهادی: داده هواشناسی و ارتفاع، مختصات/منطقه UTM، مدل‌های تابش، تولید PV، چیدمان پنل، سایه‌اندازی، محاسبات انرژی باد و تحلیل حساسیت.
-- شواهد فعلی ثبت‌شده در این مخزن: مجموعه اعتبارسنجی مدل تابش و تولید PV مورخ 2026-10-25.
-- وضعیت میدانی PV: انجام نشده؛ برای ادعای دقت میدانی نیاز به اندازه‌گیری مستقل است.
+## Solar site and PV analysis
 
-## سامانه مکان‌یابی UTM
-- حوزه‌های آزمون پیشنهادی: تبدیل مختصات، مرجع بیضوی/زون، کنترل نقاط آزمون شناخته‌شده، خطای گردکردن و مدیریت مرز زون.
-- وضعیت اعتبارسنجی: در این نسخه گزارشی درج نشده است.
+The included evidence covers selected solar-resource, plane-of-array irradiance and PV-yield calculations, including comparisons with PVGIS and Open-Meteo-derived data. The report packages distinguish weather inputs, irradiance transposition, time alignment and annual-yield calculations.
 
-## Solar PV Simulation & Analysis
-- حوزه‌های آزمون پیشنهادی: هندسه سه‌بعدی پنل، سایه‌اندازی، تابش روی سطح، تولید، تحلیل زمانی و مقایسه با مرجع مستقل.
-- شواهد فعلی: نتایج PV مرتبط با WindFarm در پوشه گزارش‌های 2026-10-25؛ دامنه آن را نباید خودکار به تمام ماژول‌ها تعمیم داد.
+The presence of a comparison report does not mean that every site-analysis feature or every equipment configuration has been validated. See the individual report and the limitations document.
 
-## Airfoil CAD
-- حوزه‌های آزمون پیشنهادی: صحت هندسه پروفیل، کنترل پارامترهای NACA، واحدها، قیود هندسی و مقایسه با داده‌های مرجع آیرودینامیکی.
-- وضعیت اعتبارسنجی: در این نسخه گزارشی درج نشده است.
+## Airfoil-CAD and rotor engineering
 
-## Desktop Solar Farm Monitoring & Management
-- حوزه‌های آزمون پیشنهادی: صحت ورودی‌های تله‌متری، ثبت داده، مدیریت خطا، زمان‌بندی، هشدار، دسترسی و تطبیق با داده تجهیزات.
-- وضعیت اعتبارسنجی: در این نسخه گزارشی درج نشده است.
+The included Airfoil-CAD material covers selected backend regression tests and documentation for airfoil geometry, BEM analysis, composite failure calculations and related structural checks. The evidence includes a test runner and a reference-data plan.
 
-## سیاست افزودن محصول
-برای هر محصول، یک پرونده مستقل شامل دامنه، نسخه، خطرات/محدودیت‌ها، آزمون‌های اجراشده، نتایج، داده‌های مرجع، معیار پذیرش، شواهد قابل دانلود و تاریخ آخرین بازبینی ایجاد شود.
+The current snapshot does not establish a complete experimental validation of the full rotor-design workflow. Some model assumptions and unimplemented effects are documented in the BEM and composite review notes.
+
+## Weather data ingestion
+
+The weather package covers test fixtures for station-data import and quality-control behaviour. Its CSV samples are synthetic and should not be used as climate data or sensor-performance evidence.
+
+## Wind resource, wakes and CFD
+
+This repository does not yet contain a complete independent experimental validation package for wind-resource estimation, wake modelling or CFD flow fields. Any future results in these areas should include matched reference measurements, domain and mesh sensitivity, boundary conditions, convergence evidence and uncertainty.
+
+## Scope discipline
+
+Only components represented by linked evidence should be described as validated. A product feature being present in the Mahras application, or having a software test, is not enough to claim that its engineering predictions have been experimentally validated.

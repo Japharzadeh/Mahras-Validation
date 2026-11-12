@@ -1,0 +1,12 @@
+metric,reported_value,independent_value_from_displayed_inputs,difference_independent_minus_reported,unit,interpretation
+direct_capex,1914500000,1914500000,0,Toman,Exact match
+engineering_capex,57435000,57435000,0,Toman,Exact match
+contingency_capex,98596750,98596750,0,Toman,Exact match
+total_capex,2070531750,2070531750,0,Toman,Exact match
+blended_tariff,4530.4,4530.4,0,Toman_per_kWh,Exact match
+first_year_revenue,188919823,188919945.2,122.2,Toman,Small difference likely due to unrounded internal annual energy; verify with raw machine value
+first_year_opex,31057976,31057976.25,0.25,Toman,Display rounding
+NPV,-939609524,-939608453.39,1070.61,Toman,Small difference likely due to unrounded internal annual energy; verify with raw machine value
+IRR_percent,2.41,2.411311,0.001311,percent,Matches to displayed precision
+simple_payback_years,17.8,17.823551,0.023551,years,Matches to one decimal place
+LCOE,7106,7106.012468,0.012468,Toman_per_kWh,Matches to displayed precision

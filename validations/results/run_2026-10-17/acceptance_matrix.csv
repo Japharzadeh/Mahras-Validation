@@ -1,0 +1,9 @@
+control,criterion,observed,status,notes
+hourly_coverage,8760 of 8760,8760,pass,Common year 2023
+annual_poa_bias_vs_pvgis,abs <= 5 percent,-0.5516459 percent,pass_screening,Annual agreement does not establish hourly accuracy
+monthly_poa_bias_vs_pvgis,abs <= 20 percent,Feb +22.4981; Jul -20.6396; Sep -26.5781 percent,fail,Seasonal discrepancy requires investigation
+hourly_poa_vs_same_provider_gti,report MAE RMSE bias and correlation,MAE 31.3189 W/m2; RMSE 57.4105 W/m2; bias -0.4082 percent; r 0.98349,informative_not_independent,Open-Meteo GTI shares weather provider
+electrical_yield_model_validation,independent matched-input model comparison,not available,not_tested,POA comparison is not AC energy validation
+field_validation,calibrated site measurements,not available,not_tested,No measured POA or AC energy dataset
+economics_formula_reconciliation,independent recalculation,capex reconciles; rounded-energy revenue/NPV small differences,pass_with_rounding_note,Exact reconciliation requires unrounded energy value
+overall,all critical checks pass,monthly POA criterion failed,not_approved,Do not label the full model as validated

@@ -1,54 +1,61 @@
-# Mahras Validation | مستندات اعتبارسنجی مهراس
+# Mahras Validation
 
-این مخزن مرجع مرکزی مستندات آزمون، ارزیابی فنی و اعتبارسنجی محصولات شرکت «آرمان سازان پردازش سبز» با برند «مهراس» است. هدف، نگهداری شواهد قابل ردیابی و قابل بازبینی برای ارائه به مشتریان سازمانی، ارزیابان فنی، مراکز رشد، سرمایه‌گذاران و شرکای تجاری است.
+**Engineering evidence for the Mahras renewable-energy software**
 
-> **وضعیت مهم:** وجود گزارش در این مخزن به معنی صدور تأییدیه رسمی، گواهی آزمایشگاه مستقل یا اثبات دقت میدانی نیست. نوع شاهد و محدودیت هر آزمون باید همراه نتیجه ارائه شود.
+This repository is the public record of selected verification and validation work carried out for Mahras. It brings together the reports, source datasets, comparison tables, test snapshots and figures that help a reviewer understand what has been checked, how it was checked, and what remains open.
 
-## شروع سریع
+The intention is not to present every passing test as proof of engineering accuracy. Each result is kept with its scope, reference source, assumptions and limitations so that the evidence can be assessed on its own merits.
 
-- [فهرست گزارش‌ها](reports/INDEX.md)
-- [سیاست اعتبارسنجی و طبقه‌بندی ادعاها](docs/VALIDATION_POLICY.md)
-- [روش‌شناسی آزمون‌ها](docs/METHODOLOGY.md)
-- [محصولات و محدوده ارزیابی](docs/PRODUCTS.md)
-- [محدودیت‌ها و موارد تأییدنشده](LIMITATIONS.md)
-- [ثبت شواهد و سوابق اجرا](EVIDENCE_LOG.md)
-- [راهنمای بازتولید و CI](docs/REPRODUCIBILITY.md)
-- [الگوی گزارش استاندارد](docs/REPORT_TEMPLATE.md)
+> **Current evidence boundary:** the material includes software regression tests and numerical comparisons against independent software/reference datasets. It does not establish field validation, product certification, or guaranteed performance at a real project site.
 
-## وضعیت فعلی شواهد
+## What is included
 
-| موضوع | نتیجه ثبت‌شده | تفسیر مجاز |
+| Area | Evidence in this repository | Current interpretation |
 |---|---|---|
-| هم‌ترازی زمانی تابش ساعتی | MAE از 24.792 به 0.866 W/m² در شیب ۰° و از 31.319 به 0.623 در شیب ۳۲° کاهش یافته است | آزمون قرارداد timestamp در این مجموعه موفق بوده است |
-| تابع تولید مهراس در برابر pvlib با ورودی یکسان | اختلاف سالانه −0.1174٪ در شیب ۰° و −0.1201٪ در شیب ۳۲° | تطابق پیاده‌سازی در محدوده داخلی ±۱٪؛ نه اثبات دقت میدانی |
-| اختلاف ماهانه POA در برابر PVGIS | چند ماه از غربالگری داخلی ±۲۰٪ عبور کرده‌اند | بررسی بیشتر لازم است؛ عبور از غربالگری به‌تنهایی اثبات خطای قطعی نیست |
-| مقایسه GHI/DNI/DHI بین منابع | GHI: +1.061٪، DNI مشتق‌شده: +12.870٪، DHI: −5.976٪ بایاس تجمیعی | مقایسه تشخیصی بین دو محصول داده اقلیمی؛ معیار قبولی عمومی نیست |
-| اعتبارسنجی میدانی | انجام نشده | داده اندازه‌گیری‌شده POA و انرژی AC در اختیار آزمون نبوده است |
-| مقایسه تولید سالانه Mahras با PVGIS PVcalc | غیرقابل مقایسه مستقیم | مرز خروجی DC-equivalent در برابر خروجی نهایی شبکه‌ای که معمولاً AC است و تفاوت داده‌های هواشناسی |
+| Solar resource and PV modelling | Hourly and monthly comparisons, PVGIS reference outputs, POA component tables, time-alignment checks and SVG figures | Numerical agreement is assessed by model layer. Differences between complete annual-yield estimates remain documented rather than hidden. |
+| Airfoil-CAD and rotor engineering | Backend acceptance tests, BEM and composite-model notes, reference-data plan, sample comparison data and a test-summary figure | A recorded 51-test software regression snapshot is available. It is not an experimental benchmark or certification result. |
+| Weather-station import | Small valid and edge-case CSV fixtures with test instructions | Synthetic test fixtures for parsing and quality-control behaviour; not measured weather observations. |
+| Site and financial analysis | Khalkhal site report and rooftop financial reconciliation data | Project-specific analytical evidence; assumptions and data provenance must be read with each report. |
 
-## آخرین مجموعه گزارش
+## Start here
 
-**مجموعه آزمون PV مورخ 2026-10-25** با سال مرجع 2023، در مختصات 37.642870° N, 48.532053° E، شامل جهت واقعی گزارش سقفی با شیب ۰° و آزیموت ۱۸۰° و آزمون مستقل شیب ۳۲° و آزیموت ۱۹۰° است.
+1. [Results catalogue](docs/RESULTS_CATALOG.md) — a reviewer-oriented guide to the evidence.
+2. [Validation methodology](docs/METHODOLOGY.md) — how comparisons, tolerances and evidence classes are treated.
+3. [Products and model scope](docs/PRODUCTS.md) — which Mahras components are covered.
+4. [Validation policy](docs/VALIDATION_POLICY.md) — rules for claims, acceptance and reporting.
+5. [Limitations and open work](LIMITATIONS.md) — what the current evidence does not prove.
+6. [Evidence log](EVIDENCE_LOG.md) — dated snapshots and their recorded status.
+7. [Source provenance](SOURCE_PROVENANCE.md) — source repository, commit and file-level traceability.
 
-- [گزارش نهایی مدل تابش و تولید](reports/2026-10-25-pv/report.md)
-- [خلاصه عددی JSON](reports/2026-10-25-pv/component_yield_summary.json)
-- [ماتریس پذیرش](reports/2026-10-25-pv/acceptance_matrix.csv)
-- [مقایسه مؤلفه‌های GHI/DNI/DHI](reports/2026-10-25-pv/component_source_comparison.csv)
-- [بایاس ماهانه مؤلفه‌ها](reports/2026-10-25-pv/monthly_component_bias.csv)
-- [مقایسه مدل‌های POA](reports/2026-10-25-pv/poa_model_comparison.csv)
-- [مقایسه مدل تولید و مرز خروجی](reports/2026-10-25-pv/annual_yield_model_comparison.csv)
-- [آزمون هم‌ترازی زمانی](reports/2026-10-25-pv/time_alignment.csv)
-- [گزارش مستقل مدل انتقال با شیب ۳۲ درجه](reports/2026-10-25-pv-tilt32/report.md)
-- [آرتیفکت اجرای خودکار GitHub Actions](https://github.com/Japharzadeh/WindFarm/actions/runs/40231005334/artifacts/12613650207)
+## Repository map
 
-## اصول استفاده از نتایج
+- `reports/` — curated report packages already maintained in this repository.
+- `validations/` — solar validation runners, archived outputs, tables and figures transferred from the Mahras project.
+- `Airfoil CAD/validation/` — Airfoil-CAD acceptance and reference-comparison material.
+- `Airfoil CAD/BEM_VALIDATION.md` and `Airfoil CAD/COMPOSITE_FAILURE_VALIDATION.md` — model scope and engineering caveats.
+- `validation/weather/` — weather-station test fixtures and instructions.
+- `docs/` — methodology, product scope, reproducibility, reporting and policy.
 
-1. هر ادعا باید به گزارش، نسخه نرم‌افزار، تاریخ اجرا، داده مرجع و معیار پذیرش مشخص ارجاع دهد.
-2. آستانه‌های داخلی، از جمله ±۱٪ برای تطابق پیاده‌سازی و ±۲۰٪ برای غربالگری ماهانه، استاندارد ملی یا بین‌المللی تلقی نمی‌شوند مگر جداگانه مستند شود.
-3. مقایسه با مدل مرجع با اعتبارسنجی میدانی و تأییدیه مستقل تفاوت دارد.
-4. نتایج مختص مکان، سال، جهت‌گیری و ورودی‌های ثبت‌شده هستند و نباید بدون آزمون به همه مکان‌ها یا سال‌ها تعمیم داده شوند.
-5. داده خام، مجوزها، اطلاعات مشتری و کلیدهای دسترسی محرمانه نباید بدون بررسی مجوز انتشار یابند.
+## Reading a result correctly
 
-## منبع اصلی نتایج
+A result should always be read together with its input data, model boundary, reference source, units, time convention and acceptance criterion. In particular:
 
-نتایج این نسخه از شاخه `feature/pv-validation-desktop-ui` مخزن [WindFarm](https://github.com/Japharzadeh/WindFarm/tree/feature/pv-validation-desktop-ui/validations) استخراج شده‌اند. فایل‌ها در این مخزن برای ارائه و بایگانی مستقل کپی شده‌اند؛ نسخه اصلی و سابقه اجرای CI از پیوندهای منبع قابل پیگیری است.
+- A unit test verifies specified software behaviour; it does not prove that a physical model matches nature.
+- Agreement with another software package is a cross-model comparison, not automatically an independent measurement.
+- Reanalysis and satellite-derived datasets are not substitutes for calibrated instruments at the project site.
+- A yearly total can agree while hourly or monthly errors remain material. The detailed time-series and residual plots matter.
+- A missing comparison is not a pass. Where source data or material properties are incomplete, the status is explicitly left open.
+
+## Reproducing the work
+
+Some validation runners use modules from the Mahras application repository and are therefore intended to be run alongside a matching Mahras source checkout. This repository preserves the validation material and its provenance; it is not a complete copy of the application. Each package describes its required environment and execution path.
+
+For a new run, use a new dated output directory. Do not overwrite a historical result. Record the Mahras commit, dependency versions, input-file hashes, reference dataset version, command, run date and generated artifacts.
+
+## Language
+
+The repository uses English for the top-level review structure and retains original Persian reports and project notes where they are part of the source record. Original wording and historical results are preserved unless a correction is clearly identified.
+
+---
+
+**Mahras — engineering evidence, not marketing claims.**

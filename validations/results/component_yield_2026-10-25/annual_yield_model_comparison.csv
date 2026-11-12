@@ -1,0 +1,9 @@
+orientation,model,annual_yield_kwh_per_kwp,output_boundary,difference_vs_pvlib_reference_pct,status
+0deg,Mahras calculate_fixed_tilt_yield,1382.363,DC-equivalent,-0.1174,PASS implementation parity
+0deg,pvlib isotropic + NOCT reference,1383.988,DC-equivalent,0,reference
+0deg,pvlib Faiman temperature sensitivity,1445.156,DC-equivalent,4.4197,sensitivity only
+0deg,PVGIS PVcalc,1237.462,final grid-connected output typically AC,11.8408,NOT_COMPARABLE
+32deg,Mahras calculate_fixed_tilt_yield,1540.416,DC-equivalent,-0.1201,PASS implementation parity
+32deg,pvlib isotropic + NOCT reference,1542.269,DC-equivalent,0,reference
+32deg,pvlib Faiman temperature sensitivity,1620.509,DC-equivalent,5.0730,sensitivity only
+32deg,PVGIS PVcalc,1399.212,final grid-connected output typically AC,10.2241,NOT_COMPARABLE

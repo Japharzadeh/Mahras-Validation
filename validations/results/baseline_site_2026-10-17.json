@@ -1,0 +1,68 @@
+{
+  "record_type": "user_supplied_report_baseline",
+  "recorded_date": "2026-10-17",
+  "site": {"latitude": 37.64287, "longitude": 48.53205},
+  "analysis_period": {
+    "start": "2025-10-17",
+    "end": "2026-10-16",
+    "expected_hourly_records": 8760,
+    "timezone": "UTC",
+    "reported_coverage_percent": 100.0
+  },
+  "internal_model": {
+    "optimal_tilt_deg": 32,
+    "optimal_azimuth_from_north_deg": 190,
+    "specific_yield_kwh_per_kwp_year": 1572,
+    "ghi_kwh_per_m2_year": 1827,
+    "dni_kwh_per_m2_year": 2123,
+    "dhi_kwh_per_m2_year": 596,
+    "poa_kwh_per_m2_year": 2036,
+    "temperature_loss_percent": 3.48,
+    "yield_after_temperature_before_system_losses_kwh_per_kwp_year": 1965,
+    "daylight_module_temperature_c": 25.8,
+    "system_loss_percent": 20,
+    "diffuse_model": "isotropic",
+    "ground_albedo": 0.2,
+    "noct_c": 45,
+    "power_temperature_coefficient_percent_per_c": -0.35
+  },
+  "pvgis": {
+    "optimal_tilt_deg": 31,
+    "optimal_aspect_deg_zero_south_positive_west": -5,
+    "optimal_yield_with_20_percent_system_loss_kwh_per_kwp_year": 1401,
+    "fixed_internal_orientation_yield_kwh_per_kwp_year": 1392,
+    "fixed_internal_orientation_poa_kwh_per_m2_year": 1885,
+    "aoi_effect_percent": -2.5,
+    "spectral_effect_percent": 0.14,
+    "low_irradiance_temperature_effect_percent": -5.45,
+    "reported_total_losses_percent": -26.15
+  },
+  "common_year_2023_hourly_poa": {
+    "hours": 8760,
+    "internal_poa_kwh_per_m2": 1974,
+    "pvgis_poa_kwh_per_m2": 1985,
+    "annual_bias_percent": -0.55,
+    "hourly_bias_w_per_m2": -1.3,
+    "hourly_mae_w_per_m2": 65.1,
+    "hourly_rmse_w_per_m2": 143.6,
+    "hourly_correlation": 0.9049,
+    "best_lag_hours": 0,
+    "best_lag_mae_w_per_m2": 65.1,
+    "largest_monthly_bias": {"month": "2023-09", "bias_percent": -26.6}
+  },
+  "derived_checks": {
+    "internal_yield_to_poa_ratio": 0.7721021611,
+    "pvgis_yield_to_poa_ratio": 0.7384615385,
+    "yield_difference_vs_pvgis_percent": 12.93103448,
+    "poa_difference_vs_pvgis_percent": 8.01061008,
+    "internal_azimuth_as_pvgis_aspect_deg": 10,
+    "pvgis_optimal_azimuth_from_north_deg": 175,
+    "optimal_direction_difference_deg": 15
+  },
+  "evidence_status": {
+    "source": "values copied from the user-provided application report",
+    "fresh_api_retrieval_performed_for_this_baseline": false,
+    "field_measurements_available": false,
+    "warning": "This baseline is not a newly executed validation run and does not represent measured site performance."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "record_type": "live_api_validation_run",
+  "run_timestamp_utc": "2026-10-17T03:05:52.007186+00:00",
+  "site": {"latitude": 37.64287, "longitude": 48.53205},
+  "orientation": {
+    "tilt_deg": 32.0,
+    "azimuth_from_north_deg": 190.0,
+    "api_aspect_zero_south_positive_west_deg": 10.0
+  },
+  "year": 2023,
+  "sources": {
+    "open_meteo": "https://open-meteo.com/en/docs/historical-weather-api",
+    "pvgis": "https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/using-pvgis-5/api-non-interactive-service_en",
+    "pvgis_radiation_database": "PVGIS-SARAH3"
+  },
+  "internal_poa_vs_pvgis": {
+    "hours": 8760,
+    "internal_poa_kwh_m2": 1974.4156593150315,
+    "pvgis_poa_kwh_m2": 1985.36786,
+    "annual_bias_percent": -0.5516459143732017,
+    "hourly_bias_w_m2": -1.2502512197452815,
+    "hourly_mae_w_m2": 65.1130575216068,
+    "hourly_rmse_w_m2": 143.6288816406575,
+    "hourly_correlation": 0.9048719293097189,
+    "horizon_shading": false,
+    "temperature_and_system_losses_included": false
+  },
+  "internal_poa_vs_open_meteo_gti": {
+    "hours": 8760,
+    "internal_poa_kwh_m2": 1974.4156593150315,
+    "open_meteo_gti_kwh_m2": 1982.5089,
+    "annual_bias_percent": -0.4082322498006762,
+    "hourly_bias_w_m2": -0.9238859229416252,
+    "hourly_mae_w_m2": 31.31887266218983,
+    "hourly_rmse_w_m2": 57.41046144418034,
+    "hourly_correlation": 0.9834915029112967,
+    "note": "Same weather provider; useful for transposition implementation cross-check but not an independent climate validation."
+  },
+  "monthly_poa_vs_pvgis": [
+    {"month":"2023-01","internal_kwh_m2":121.72638117812237,"pvgis_kwh_m2":101.53167,"bias_percent":19.890061079584584},
+    {"month":"2023-02","internal_kwh_m2":152.2631265320718,"pvgis_kwh_m2":124.29834,"bias_percent":22.49811745842445},
+    {"month":"2023-03","internal_kwh_m2":168.27728846508842,"pvgis_kwh_m2":145.33268,"bias_percent":15.78764560392632},
+    {"month":"2023-04","internal_kwh_m2":196.84965268893762,"pvgis_kwh_m2":180.08349,"bias_percent":9.31021643846282},
+    {"month":"2023-05","internal_kwh_m2":192.51065712631214,"pvgis_kwh_m2":188.10427,"bias_percent":2.3425237110843344},
+    {"month":"2023-06","internal_kwh_m2":188.16572420051477,"pvgis_kwh_m2":212.85855,"bias_percent":-11.600579727469313},
+    {"month":"2023-07","internal_kwh_m2":177.74867397798567,"pvgis_kwh_m2":223.97645,"bias_percent":-20.639569928898535},
+    {"month":"2023-08","internal_kwh_m2":203.8914970067855,"pvgis_kwh_m2":223.65223,"bias_percent":-8.8354732672303},
+    {"month":"2023-09","internal_kwh_m2":148.40258774994444,"pvgis_kwh_m2":202.12319,"bias_percent":-26.578148825998447},
+    {"month":"2023-10","internal_kwh_m2":159.22467607501238,"pvgis_kwh_m2":151.07125,"bias_percent":5.397073284964804},
+    {"month":"2023-11","internal_kwh_m2":136.00007306477121,"pvgis_kwh_m2":115.90614,"bias_percent":17.3363836158906},
+    {"month":"2023-12","internal_kwh_m2":129.35532124948503,"pvgis_kwh_m2":116.4296,"bias_percent":11.1017483951547}
+  ],
+  "lag_sensitivity": [
+    {"lag_hours":-2,"mae_w_m2":144.4474258808574,"rmse_w_m2":237.4365690259295,"correlation":0.7371187479253686,"hours":8758},
+    {"lag_hours":-1,"mae_w_m2":95.09284247290249,"rmse_w_m2":168.75749798491134,"correlation":0.86803528228118,"hours":8759},
+    {"lag_hours":0,"mae_w_m2":65.1130575216068,"rmse_w_m2":143.6288816406575,"correlation":0.9048719293097189,"hours":8760},
+    {"lag_hours":1,"mae_w_m2":105.60475897886177,"rmse_w_m2":188.42744885563434,"correlation":0.835060223927014,"hours":8759},
+    {"lag_hours":2,"mae_w_m2":160.6280957193287,"rmse_w_m2":260.8519407746188,"correlation":0.6823610336905728,"hours":8758}
+  ],
+  "evidence_limitations": [
+    "No site pyranometer measurements were provided.",
+    "This validates hourly POA comparison only, not annual AC energy yield.",
+    "Open-Meteo GTI shares the same weather source and is not an independent climate dataset."
+  ]
+}

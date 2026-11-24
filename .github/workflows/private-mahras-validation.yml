@@ -23,6 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Check out private Mahras source without publishing it
+        id: checkout-private
         uses: actions/checkout@v4
         with:
           repository: Japharzadeh/Mahras
@@ -103,7 +104,6 @@ jobs:
         if: always()
         env:
           SOURCE_SHA: ${{ steps.checkout-private.outputs.commit }}
-          PRIVATE_SHA: ${{ github.sha }}
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |

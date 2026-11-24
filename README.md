@@ -59,3 +59,12 @@ The repository uses English for the top-level review structure and retains origi
 ---
 
 **Mahras — engineering evidence, not marketing claims.**
+
+
+## Live validation of the private source
+
+The public workflow can run the current private Mahras test suites without copying
+application code or tests into this repository. Configure the read-only
+`MAHRAS_READ_TOKEN` repository secret, then run
+[Private Mahras validation](.github/workflows/private-mahras-validation.yml).
+See [private-source execution instructions](docs/PRIVATE_SOURCE_EXECUTION.md).

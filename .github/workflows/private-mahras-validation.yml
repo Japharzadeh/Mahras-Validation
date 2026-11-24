@@ -1,0 +1,207 @@
+name: Private Mahras validation
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 2 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: private-mahras-validation
+  cancel-in-progress: false
+
+jobs:
+  validate-private-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out public validation repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out private Mahras source without publishing it
+        uses: actions/checkout@v4
+        with:
+          repository: Japharzadeh/Mahras
+          ref: main
+          token: ${{ secrets.MAHRAS_READ_TOKEN }}
+          path: private-source
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: private-source/requirements.txt
+
+      - name: Install runtime and validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy pandas matplotlib pillow requests pyproj pvlib pytest PySide6 pyvista
+
+      - name: Run private validation suites
+        id: suites
+        shell: bash
+        run: |
+          set +e
+          mkdir -p private-results
+          cd private-source
+
+          run_suite() {
+            suite="$1"
+            shift
+            pytest -q --disable-warnings --maxfail=20 "$@" \
+              --junitxml="../private-results/${suite}.xml" \
+              > "../private-results/${suite}.log" 2>&1
+            result=$?
+            printf '%s\t%s\n' "$suite" "$result" >> ../private-results/exit-codes.tsv
+            return 0
+          }
+
+          run_suite solar_geometry \
+            tests/test_solar_obstacle_shadow_geometry.py \
+            tests/test_solar_shadow_analysis.py \
+            tests/test_solar_terrain_integration.py \
+            tests/test_solar_position.py \
+            tests/test_solar_shading_simulation_3d.py \
+            tests/test_3d_solar_shadow_geometry.py
+
+          run_suite pv_models \
+            tests/test_pv_layout_optimizer.py \
+            tests/test_pv_system_design.py \
+            tests/test_solar_pv_yield.py \
+            tests/test_pv_hourly_validation.py \
+            tests/test_pv_component_validation.py \
+            tests/test_pv_validation_runner.py \
+            tests/test_pv_validation_financial_model.py \
+            tests/test_solar_comprehensive_analysis.py
+
+          run_suite weather_and_wind \
+            tests/test_station_data.py \
+            tests/test_directional_wind.py \
+            tests/test_weather_quality.py \
+            tests/test_weibull.py \
+            tests/test_soiling.py \
+            tests/test_historical_hourly_dataset.py \
+            tests/test_aerodynamic_cfd.py \
+            tests/test_wake_3d_cancellation.py
+
+          run_suite airfoil_and_composites \
+            "Airfoil CAD/tests/test_bem_solver.py" \
+            "Airfoil CAD/tests/test_composite_damage_runner.py" \
+            "Airfoil CAD/tests/test_composite_failure.py" \
+            "Airfoil CAD/tests/test_progressive_damage.py" \
+            "Airfoil CAD/tests/test_turbulence_reynolds.py"
+
+          exit 0
+
+      - name: Create sanitized public result
+        if: always()
+        env:
+          SOURCE_SHA: ${{ steps.checkout-private.outputs.commit }}
+          PRIVATE_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import pathlib
+          import xml.etree.ElementTree as ET
+          from datetime import datetime, timezone
+
+          root = pathlib.Path("private-results")
+          exits = {}
+          exit_file = root / "exit-codes.tsv"
+          if exit_file.exists():
+              for line in exit_file.read_text().splitlines():
+                  name, code = line.split("\t", 1)
+                  exits[name] = int(code)
+
+          suites = []
+          totals = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0}
+          for name in ("solar_geometry", "pv_models", "weather_and_wind", "airfoil_and_composites"):
+              xml_path = root / f"{name}.xml"
+              counts = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0}
+              if xml_path.exists():
+                  try:
+                      node = ET.parse(xml_path).getroot()
+                      nodes = [node] if node.tag == "testsuite" else list(node.iter("testsuite"))
+                      for item in nodes:
+                          for key in counts:
+                              counts[key] += int(item.attrib.get(key, 0))
+                  except (ET.ParseError, ValueError):
+                      pass
+              for key in totals:
+                  totals[key] += counts[key]
+              code = exits.get(name, 99)
+              suites.append({
+                  "suite": name,
+                  "status": "passed" if code == 0 and counts["failures"] == 0 and counts["errors"] == 0 else "failed",
+                  **counts
+              })
+
+          source_sha = os.environ.get("SOURCE_SHA") or "unavailable"
+          payload = {
+              "schema_version": 1,
+              "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+              "source_repository": "Japharzadeh/Mahras",
+              "source_ref": "main",
+              "source_commit": source_sha,
+              "workflow_run_id": os.environ.get("RUN_ID"),
+              "workflow_run_attempt": os.environ.get("RUN_ATTEMPT"),
+              "result": "passed" if len(suites) == 4 and all(s["status"] == "passed" for s in suites) else "failed",
+              "totals": totals,
+              "suites": suites,
+              "privacy": {
+                  "source_code_published": False,
+                  "test_names_and_failure_traces_published": False,
+                  "raw_logs_published": False
+              }
+          }
+          root.mkdir(exist_ok=True)
+          (root / "public-summary.json").write_text(json.dumps(payload, indent=2) + "\n")
+          print(json.dumps(payload, indent=2))
+          PY
+
+      - name: Add concise result to workflow summary
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          p = json.loads(Path("private-results/public-summary.json").read_text())
+          print("# Private Mahras validation")
+          print()
+          print(f"- Source commit: `{p['source_commit']}`")
+          print(f"- Overall result: **{p['result'].upper()}**")
+          print(f"- Tests: {p['totals']['tests']} | failures: {p['totals']['failures']} | errors: {p['totals']['errors']} | skipped: {p['totals']['skipped']}")
+          print()
+          print("| Suite | Status | Tests | Failures | Errors | Skipped |")
+          print("|---|---:|---:|---:|---:|---:|")
+          for s in p["suites"]:
+              print(f"| {s['suite']} | {s['status']} | {s['tests']} | {s['failures']} | {s['errors']} | {s['skipped']} |")
+          PY
+
+      - name: Publish sanitized summary artifact only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mahras-validation-summary-${{ github.run_id }}
+          path: private-results/public-summary.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Fail the run if any suite failed
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path("private-results/public-summary.json").read_text())
+          raise SystemExit(0 if p["result"] == "passed" else 1)
+          PY

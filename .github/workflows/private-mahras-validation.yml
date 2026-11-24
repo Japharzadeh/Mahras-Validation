@@ -36,8 +36,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-          cache-dependency-path: private-source/requirements.txt
 
       - name: Install runtime and validation dependencies
         run: |
@@ -67,6 +65,7 @@ jobs:
             tests/test_solar_obstacle_shadow_geometry.py \
             tests/test_solar_shadow_analysis.py \
             tests/test_solar_terrain_integration.py \
+            tests/test_topography_generator.py \
             tests/test_solar_position.py \
             tests/test_solar_shading_simulation_3d.py \
             tests/test_3d_solar_shadow_geometry.py
